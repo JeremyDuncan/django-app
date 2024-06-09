@@ -1,15 +1,12 @@
-// src/components/YourComponent.js
+// src/pages/Home.js
 import React from 'react';
-import {Button, Container, Typography } from '@mui/material'
-
-
+import HomeContent from '../components/Home/HomeContent';
 
 const Home = () => {
   return (
-    <Container>
-      <Typography variant="h1">Hello World</Typography>
-      <Button variant="contained" color="primary">Click Me</Button>
-    </Container>
+    <div>
+      <HomeContent />
+    </div>
   );
 };
 
