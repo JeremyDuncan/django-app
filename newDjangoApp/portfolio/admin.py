@@ -1,7 +1,14 @@
+# portfolio/admin.py
 from django.contrib import admin
+from .models import Project, Tag
 
-# Register your models here.
-from django.contrib import admin
-from .models import Project
+class TagAdmin(admin.ModelAdmin):
+    search_fields = ['name']
 
-admin.site.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['tags']
+    list_display = ['title', 'description', 'technologies', 'link', 'user']
+    search_fields = ['title', 'description', 'technologies', 'link', 'user__username']
+
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Tag, TagAdmin)

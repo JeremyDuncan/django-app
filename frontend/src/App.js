@@ -1,25 +1,42 @@
 // src/App.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import Home from './pages/Home';
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import HomeContent from './components/Home/HomeContent';
 
-function App() {
+const App = () => {
+  const [darkMode, setDarkMode] = useState(true);
+
+  useEffect(() => {
+    setDarkMode(localStorage.getItem('darkMode') === 'true');
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+
+  const customTheme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+  });
+
+  const handleThemeChange = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      <Router>
+        <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
+        <Routes>
+          <Route path="/" element={<HomeContent />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

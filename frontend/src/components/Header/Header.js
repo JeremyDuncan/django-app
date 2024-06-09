@@ -1,9 +1,11 @@
 // src/components/Header/Header.js
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, useMediaQuery, useTheme, Switch } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-const Header = () => {
+const Header = ({ darkMode, handleThemeChange }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -31,6 +33,10 @@ const Header = () => {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Portfolio
           </Typography>
+          <IconButton color="inherit" onClick={handleThemeChange}>
+            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
+          <Switch checked={darkMode} onChange={handleThemeChange} />
           {!isMobile && menuItems.map((item) => (
             <Button key={item.text} color="inherit" href={item.href}>
               {item.text}

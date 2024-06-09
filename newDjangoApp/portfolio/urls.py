@@ -16,15 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import ProjectViewSet, TagViewSet, index
 
-from django.urls import path
-from . import views
-# from .views import index
-
+router = DefaultRouter()
+router.register(r'projects', ProjectViewSet)
+router.register(r'tags', TagViewSet)
 
 urlpatterns = [
-    # path('', views.home, name='home'),
-    path('', views.index, name='index'),
-
+    path('api/', include(router.urls)),
+    path('', index, name='index'),  # Serve the React frontend
 ]
-
