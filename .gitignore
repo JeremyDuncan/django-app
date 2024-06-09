@@ -159,6 +159,8 @@ cython_debug/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+secrets.json
+
 
 # PyCharm
 #.idea/
